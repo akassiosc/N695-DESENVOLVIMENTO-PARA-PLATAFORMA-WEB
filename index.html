@@ -4,99 +4,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title> N695 - Trabalho de Desenvolvimento de plataforma Web </title>
-    <link rel="stylesheet" href="estilo.css">
+    <title>Loja de Roupas Online</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 56px;
+            /* Espaço para a navbar fixa */
+            font-family: 'Open Sans', sans-serif;
+            background: #f8f9fa;
+        }
 
+        .masthead {
+            background: url('header-bg.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            height: 100vh;
+            min-height: 500px;
+            padding-top: 150px;
+            /* Espaço para o conteúdo do header */
+            padding-bottom: 150px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        .masthead h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .masthead p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #0056b3;
+        }
+
+        .categoria-card {
+            transition: transform .2s;
+            /* Animação */
+            border: none;
+        }
+
+        .categoria-card:hover {
+            transform: scale(1.05);
+            /* Efeito de zoom ao passar o mouse */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        /* Estilos para telas pequenas */
+        @media (max-width: 992px) {
+            .masthead {
+                height: auto;
+                min-height: 0;
+                padding-top: 100px;
+                padding-bottom: 100px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1> N695 - Trabalho de Desenvolvimento de plataforma Web </h1>
 
-    <!--
-       Comentários...
-        Site: w3schools.com/html/html_intro.asp
-    
-      -->
-
-    <nav class="navbar navbar-expand-lg navbar bg-dark border-bottom border-body">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Loja de Roupas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="login.html">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        <a class="nav-link" href="register.html">Cadastro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <a class="nav-link" href="admin.html">Administração</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
 
-    <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+    <!-- Header - Landing Page Content -->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="fw-light">Nova Coleção Outono-Inverno</h1>
+                    <p class="lead">Descubra estilos que contam a sua história.</p>
+                    <a href="#categorias" class="btn btn-lg btn-light">Explorar Coleção</a>
+                </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-    <!--
-       Para inserir link externo
-      -->
-    <a href="https://github.com/" target="_blank"> clique aqui! </a>
+    </header>
 
+    <!-- Seção de Categorias -->
+    <section id="categorias" class="py-5">
+        <div class="container">
+            <div class="row text-center">
+                <!-- Categoria Casual -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card categoria-card">
+                        <img class="card-img-top" src="categoria-casual.jpg" alt="Categoria Casual">
+                        <div class="card-body">
+                            <h4 class="card-title">Casual</h4>
+                            <p class="card-text">Conforto e estilo para o seu dia a dia.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categoria Esportivo -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card categoria-card">
+                        <img class="card-img-top" src="categoria-esportivo.jpg" alt="Categoria Esportivo">
+                        <div class="card-body">
+                            <h4 class="card-title">Esportivo</h4>
+                            <p class="card-text">Para quem leva a vida em movimento.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categoria Social -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card categoria-card">
+                        <img class="card-img-top" src="categoria-social.jpg" alt="Categoria Social">
+                        <div class="card-body">
+                            <h4 class="card-title">Social</h4>
+                            <p class="card-text">Elegância e sofisticação para eventos formais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container">
+            <p class="m-0 text-center">Direitos autorais &copy; Loja de Roupas 2023</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
-
-
 
 </html>
