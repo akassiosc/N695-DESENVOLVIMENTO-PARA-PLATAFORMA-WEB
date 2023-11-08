@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
+
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <h2 class="mb-3">Cadastro</h2>
+            <div class="col-md-8 offset-md-2">
+                <h2 class="mb-4">Cadastro de Usuário</h2>
                 <form>
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Nome Completo</label>
@@ -27,7 +29,38 @@
                     </div>
                     <div class="mb-3">
                         <label for="inputConfirmPassword" class="form-label">Confirme a Senha</label>
-                        <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Repita a senha">
+                        <input type="password" class="form-control" id="inputConfirmPassword"
+                            placeholder="Repita a senha">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputAddress" class="form-label">Endereço</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Rua Principal">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputAddress2" class="form-label">Complemento</label>
+                        <input type="text" class="form-control" id="inputAddress2"
+                            placeholder="Apartamento, estúdio ou andar">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="inputCity" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="inputState" class="form-label">Estado</label>
+                            <select id="inputState" class="form-select">
+                                <option selected>Escolher...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="inputZip" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="inputZip">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputPhone" class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" id="inputPhone" placeholder="(XX) XXXXX-XXXX">
                     </div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </form>
@@ -40,4 +73,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
+
 </html>

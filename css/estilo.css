@@ -1,13 +1,88 @@
 body {
-    background-color: lightblue;
+    padding-top: 56px;
+    /* Espaço para a navbar fixa */
+    font-family: 'Open Sans', sans-serif;
+    background: #f8f9fa;
 }
 
-h1 {
+.masthead {
+    background: url('header-bg.jpg') no-repeat center center;
+    /* Substitua pelo caminho da sua imagem de cabeçalho */
+    background-size: cover;
     color: white;
+    height: 100vh;
+    min-height: 500px;
+    padding-top: 150px;
+    /* Espaço para o conteúdo do header */
+    padding-bottom: 150px;
     text-align: center;
 }
 
-p {
-    font-family: verdana;
-    font-size: 20px;
+.masthead h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.masthead p {
+    font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-brand {
+    font-weight: bold;
+    color: #495057;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #495057;
+    font-weight: 500;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #0056b3;
+}
+
+/* Categoria card styles */
+.categoria-card img {
+    height: 250px;
+    /* Fixa a altura da imagem */
+    object-fit: cover;
+    /* Garante que a imagem cubra todo o espaço disponível */
+}
+
+.card-categoria {
+    transition: transform .2s;
+    /* Animação suave para o efeito de zoom */
+}
+
+.card-categoria:hover {
+    transform: scale(1.05);
+    /* Efeito de zoom ao passar o mouse */
+}
+
+/* Rodapé */
+.footer {
+    background: #343a40;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer p {
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    .masthead {
+        height: auto;
+        min-height: 0;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .masthead h1 {
+        font-size: 2.5rem;
+    }
+
+    .masthead p {
+        font-size: 1.2rem;
+    }
 }
