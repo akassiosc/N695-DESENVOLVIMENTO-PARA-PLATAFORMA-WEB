@@ -1,8 +1,11 @@
+
+// Configuração inicial
 const express = require('express');
 const app = express();
-const port = 3000; //porta padrão
 
 const axios = require('axios');
+
+// forma de ler JSON / middlewares
 
 app.use(require('cors')());
 app.use(express.urlencoded({ extended: true }));
@@ -19,22 +22,18 @@ router.get('/teste', (req, res) => res.json({ message: 'Funcionando!' }));
 // Configurando o START do servidor
 app.use('/', router);
 
-// API de consulta CEP
 
-app.get('cep/:cep', async (req, res) => {
-    const { cep } = req.params;
-    try {
-        const url = `http://viacep.com.br/ws/${cep}/json/`;
-        const response = await axios.get(url);
-        return res.status(200).send(response.data);
+// rota inicial / endpoint
 
-    } catch (erro) {
-        return res.status(500).send({ error: 'ERRO ao consultar o CEP' });
+app.get('/', (req, res) => {
 
-    }
+    // mostrar req
+
+    res.json({ message: 'Oi Express!' })
+
 
 });
 
 //inicia o servidor
-app.listen(port);
+app.listen(3000);
 console.log('Servidor/API funcionando!');
