@@ -8,11 +8,17 @@ const axios = require('axios');
 // forma de ler JSON / middlewares
 
 app.use(require('cors')());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+
+app.use(express.json())
 
 //definindo as rotas
-const router = express.Router();
+const router = express.Router()
 
 // API de Teste
 
