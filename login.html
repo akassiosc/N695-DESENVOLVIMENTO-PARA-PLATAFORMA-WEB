@@ -8,27 +8,69 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Custom styles -->
+    <style>
+        body {
+            background-color: #ffecef;
+            /* Um tom claro de rosa */
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            /* Faz o container ocupar toda a altura da tela */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-form {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+        }
+
+        .login-form h2 {
+            color: #f06c9b;
+            /* Um rosa mais escuro para o título */
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #f06c9b;
+            /* A cor rosa do botão */
+            border: none;
+            /* Remove a borda padrão do botão */
+        }
+
+        .btn-primary:hover {
+            background-color: #e0638b;
+            /* Um rosa mais escuro quando passar o mouse */
+        }
+
+        .form-label {
+            color: #444;
+            /* Cor escura para as labels que contrasta bem com o fundo rosa */
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 mt-5">
-                <h2 class="mb-3">Login</h2>
-                <form>
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputPassword" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Digite sua senha">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
-                </form>
-            </div>
+    <div class="container login-container">
+        <div class="col-md-6 col-lg-4 login-form">
+            <h2 class="text-center">Login</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu email">
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Digite sua senha">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
         </div>
     </div>
 
