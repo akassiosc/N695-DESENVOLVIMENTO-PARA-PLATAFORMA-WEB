@@ -1,0 +1,61 @@
+/* Custom styles for the iChoter online store */
+body {
+    background-color: #fff0f5;
+    /* Light pink background */
+}
+
+.navbar {
+    background-color: #ff69b4;
+    /* Hot pink navbar */
+}
+
+.nav-link {
+    color: #ffffff;
+    /* White text for nav links */
+}
+
+.nav-link:hover {
+    color: #ffbfd2;
+    /* Lighter pink for hover state */
+}
+
+/* Main marketing message and call to action */
+.bg-light {
+    background-color: #ff69b4 !important;
+    /* Hot pink background for the header */
+    color: #ffffff;
+    /* White text for the header */
+}
+
+.btn-outline-secondary {
+    color: #ffffff;
+    /* White text for button */
+    border-color: #ffffff;
+    /* White border for button */
+}
+
+.btn-outline-secondary:hover {
+    background-color: #ffffff;
+    /* White background for hovered button */
+    color: #ff69b4;
+    /* Hot pink text for hovered button */
+}
+
+.footer {
+    background-color: #ff69b4;
+    /* Hot pink footer */
+    color: #ffffff;
+    /* White text for footer */
+}
+
+.link-secondary {
+    color: #ffffff;
+    /* White text for footer links */
+}
+
+.link-secondary:hover {
+    color: #ffbfd2;
+    /* Lighter pink for hover state on footer links */
+}
+
+/* Additional styles can be added as needed */
