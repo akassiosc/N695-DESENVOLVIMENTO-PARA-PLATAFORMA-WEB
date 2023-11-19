@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const app = express()
 const port = 3000
-mongoose.connect('mongodb+srv://Akassiosc:<password>@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://Akassiosc:1PkTZ8vunbyWEOLb@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority');
 
 const Cadastro = mongoose.model('Cadastro', {
     name: String,
