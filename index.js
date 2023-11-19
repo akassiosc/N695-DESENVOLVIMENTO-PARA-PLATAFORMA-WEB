@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 
 const app = express()
+app.use(express.json());
 const port = 3000
 mongoose.connect('mongodb+srv://Akassiosc:1PkTZ8vunbyWEOLb@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority');
 
