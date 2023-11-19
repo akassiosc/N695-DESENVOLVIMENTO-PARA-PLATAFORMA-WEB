@@ -11,10 +11,20 @@ async function connect() {
 const express = require('express');
 const app = express();
 const port = 3000; //porta padrão
+const axios = require('axios');
 
 app.use(require('cors')());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+function trazerrepositoriosgithub() {
+    axios
+        .get(`https://api.github.com/users/${nome.value}/repos`)
+        .then((response) => {
+            const repos = response.data;
+            console.log(respos);
+        })
+}
 
 //definindo as rotas
 const router = express.Router();
