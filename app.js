@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // Substitua pela sua URI do MongoDB Atlas
-mongoose.connect('sua_uri_do_mongodb_atlas', {
+mongoose.connect('mongodb+srv://Akassiosc:1PkTZ8vunbyWEOLb@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
