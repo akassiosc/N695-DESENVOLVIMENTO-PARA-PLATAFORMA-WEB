@@ -118,6 +118,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <!-- script para capturar os dados do formulário de registro e enviar uma requisição POST para o servidor. -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const userData = {
+                name: document.getElementById('inputName').value,
+                email: document.getElementById('inputEmail').value,
+                password: document.getElementById('inputPassword').value,
+                address: document.getElementById('inputAddress').value,
+                city: document.getElementById('inputCity').value,
+                state: document.getElementById('inputState').value,
+                zip: document.getElementById('inputZip').value,
+                phone: document.getElementById('inputPhone').value
+            };
+
+            axios.post('/users', userData)
+                .then(function (response) {
+                    alert('Usuário cadastrado com sucesso!');
+                    // Redirecionar para a página de login ou principal
+                })
+                .catch(function (error) {
+                    alert('Erro ao cadastrar usuário!');
+                    console.log(error);
+                });
+        });
+    </script>
+
+
 </body>
 
 </html>

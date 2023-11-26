@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Encontre as últimas tendências da moda na iCloset.">
     <meta name="author" content="Akassio Correia, Icaro e Mariana">
-    <title>iChoter - Sua moda, seu estilo!</title>
+    <title>iCloset - Sua moda, seu estilo!</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -31,16 +31,6 @@
             color: #ff69b4;
         }
 
-        .btn-outline-secondary {
-            color: #ff69b4;
-            border-color: #ff69b4;
-        }
-
-        .btn-outline-secondary:hover {
-            color: white;
-            background-color: #ff69b4;
-        }
-
         .footer {
             background-color: #ff69b4;
             color: white;
@@ -58,6 +48,12 @@
             height: 200px;
             object-fit: contain;
             background-color: #fff;
+        }
+
+        .price {
+            font-size: 1.2em;
+            color: #ff69b4;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -86,10 +82,8 @@
         <div class="container py-5 text-center">
             <h1 class="main-heading">Moda atual e estilo único.</h1>
             <p class="lead">Explore nossa coleção e encontre o estilo que expressa quem você é.</p>
-            <a class="btn btn-outline-secondary" href="#">Veja as novidades</a>
         </div>
 
-        <!-- Seção de produtos -->
         <div class="container my-4">
             <div class="row">
                 <div class="col-md-4">
@@ -98,33 +92,33 @@
                         <div class="card-body">
                             <h5 class="card-title">Vestido Mariana Galvão</h5>
                             <p class="card-text">Rosa barbie.</p>
-                            <a href="pagamento.html" class="btn btn-primary">Comprar</a>
+                            <p class="price">R$ 150,00</p>
+                            <a href="pagamento.html?preco=R$150,00" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="card">
                         <img src="/Imagens/vestidoazul1.jpg" class="card-img-top" alt="Vestido Azul">
                         <div class="card-body">
                             <h5 class="card-title">Vestido Azul</h5>
                             <p class="card-text">Vestido azul mar.</p>
-                            <a href="pagamento.html" class="btn btn-primary">Comprar</a>
+                            <p class="price">R$ 200,00</p>
+                            <a href="pagamento.html?preco=R$200,00" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="card">
                         <img src="/Imagens/noiva1.JPG" class="card-img-top" alt="Vestido de Noiva">
                         <div class="card-body">
                             <h5 class="card-title">Vestido de Noiva</h5>
                             <p class="card-text">Vestido de noiva moderno.</p>
-                            <a href="pagamento.html" class="btn btn-primary">Comprar</a>
+                            <p class="price">R$ 500,00</p>
+                            <a href="pagamento.html?preco=R$500,00" class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
                 </div>
-                <!-- Outros produtos podem ser adicionados aqui -->
             </div>
         </div>
     </main>
@@ -138,6 +132,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="app.js"></script>
 </body>
+
+</html>

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração - Loja de Roupas Online</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
 </head>
+
 <body>
     <div class="container mt-5">
         <h2>Painel Administrativo</h2>
         <div id="userList" class="mt-4">
-            <!-- A tabela de usuários será inserida aqui -->
             <table class="table">
                 <thead>
                     <tr>
@@ -28,26 +29,21 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script>
-        // Quando a janela carregar, buscar a lista de usuários
-        window.onload = function() {
+        function loadUsers() {
             axios.get('/api/users')
                 .then(function (response) {
                     const users = response.data;
                     const usersTableBody = document.getElementById('usersTableBody');
-                    usersTableBody.innerHTML = ''; // Limpar a tabela antes de inserir novos usuários
-                    
-                    // Inserir cada usuário na tabela
+                    usersTableBody.innerHTML = '';
+
                     users.forEach(user => {
                         usersTableBody.innerHTML += `
                             <tr>
                                 <td>${user._id}</td>
-                                <td>${user.username}</td>
+                                <td>${user.name}</td>
                                 <td>
+                                    <button onclick="editUser('${user._id}')" class="btn btn-secondary">Editar</button>
                                     <button onclick="deleteUser('${user._id}')" class="btn btn-danger">Excluir</button>
                                 </td>
                             </tr>
@@ -57,19 +53,38 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-        };
+        }
 
-        // Função para excluir usuário
+        window.onload = loadUsers;
+
         function deleteUser(userId) {
             axios.delete(`/api/users/${userId}`)
                 .then(function (response) {
-                    // Após excluir, recarregar a lista de usuários
-                    window.onload();
+                    loadUsers();
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         }
+
+        function editUser(userId) {
+            const userName = prompt("Digite o novo nome do usuário:");
+            if (userName) {
+                axios.put(`/api/users/${userId}`, { name: userName })
+                    .then(function (response) {
+                        loadUsers();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
     </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
+
 </html>
