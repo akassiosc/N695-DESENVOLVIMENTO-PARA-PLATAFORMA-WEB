@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - iCloset - Loja de Roupas Online</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <!-- Estilos personalizados -->
     <style>
         body {
             background-color: #ffecef;
+            /* Um tom claro de rosa */
             font-family: 'Open Sans', sans-serif;
         }
 
         .register-container {
             min-height: 100vh;
+            /* Faz o container ocupar toda a altura da tela */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -25,24 +29,30 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
             margin-top: 50px;
+            /* Espaço no topo da página */
         }
 
         .register-form h2 {
             color: #f06c9b;
+            /* Um rosa mais escuro para o título */
             margin-bottom: 1rem;
         }
 
         .btn-primary {
             background-color: #f06c9b;
+            /* A cor rosa do botão */
             border: none;
+            /* Remove a borda padrão do botão */
         }
 
         .btn-primary:hover {
             background-color: #e0638b;
+            /* Um rosa mais escuro quando passar o mouse */
         }
 
         .form-label {
             color: #444;
+            /* Cor escura para as labels que contrasta bem com o fundo rosa */
         }
     </style>
 </head>
@@ -51,7 +61,7 @@
     <div class="container register-container">
         <div class="col-md-8 offset-md-2 register-form">
             <h2 class="text-center mb-4">Cadastro de Usuário</h2>
-            <form id="formCadastro">
+            <form>
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Nome Completo</label>
                     <input type="text" class="form-control" id="inputName" placeholder="Digite seu nome completo">
@@ -64,34 +74,80 @@
                     <label for="inputPassword" class="form-label">Senha</label>
                     <input type="password" class="form-control" id="inputPassword" placeholder="Crie uma senha">
                 </div>
+                <div class="mb-3">
+                    <label for="inputConfirmPassword" class="form-label">Confirme a Senha</label>
+                    <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Repita a senha">
+                </div>
+                <div class="mb-3">
+                    <label for="inputAddress" class="form-label">Endereço</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Rua Principal">
+                </div>
+                <div class="mb-3">
+                    <label for="inputAddress2" class="form-label">Complemento</label>
+                    <input type="text" class="form-control" id="inputAddress2"
+                        placeholder="Apartamento, estúdio ou andar">
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Estado</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Escolher...</option>
+                            <!-- Adicione mais opções de estado aqui -->
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">CEP</label>
+                        <input type="text" class="form-control" id="inputZip">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputPhone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control" id="inputPhone" placeholder="(XX) XXXXX-XXXX">
+                </div>
                 <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
             </form>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <!-- script para capturar os dados do formulário de registro e enviar uma requisição POST para o servidor. -->
     <script>
-        document.getElementById('formCadastro').addEventListener('submit', function (e) {
+        document.querySelector('form').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const userData = {
                 name: document.getElementById('inputName').value,
                 email: document.getElementById('inputEmail').value,
-                password: document.getElementById('inputPassword').value
+                password: document.getElementById('inputPassword').value,
+                address: document.getElementById('inputAddress').value,
+                city: document.getElementById('inputCity').value,
+                state: document.getElementById('inputState').value,
+                zip: document.getElementById('inputZip').value,
+                phone: document.getElementById('inputPhone').value
             };
 
-            axios.post('http://localhost:3000/users', userData)
+            axios.post('/users', userData)
                 .then(function (response) {
                     alert('Usuário cadastrado com sucesso!');
-                    // Aqui você pode adicionar código para redirecionar o usuário
+                    // Redirecionar para a página de login ou principal
                 })
                 .catch(function (error) {
                     alert('Erro ao cadastrar usuário!');
-                    console.error(error);
+                    console.log(error);
                 });
         });
     </script>
+
+
 </body>
 
 </html>
