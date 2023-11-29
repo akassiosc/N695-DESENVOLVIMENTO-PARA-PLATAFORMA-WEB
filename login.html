@@ -108,11 +108,8 @@
 
             axios.post('http://localhost:3000/login', loginData)
                 .then(function (response) {
-                    // Armazenar o email do usuário no LocalStorage
                     localStorage.setItem('userEmail', loginData.email);
-
-                    // Redirecionar para a página inicial
-                    window.location.href = 'index.html';
+                    window.location.href = 'index.html'; // Redireciona para a página inicial
                 })
                 .catch(function (error) {
                     alert('Falha no login!');
@@ -120,6 +117,7 @@
                 });
         });
     </script>
+
 
 </body>
 

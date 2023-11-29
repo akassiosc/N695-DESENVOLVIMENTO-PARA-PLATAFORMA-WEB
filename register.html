@@ -128,24 +128,21 @@
                 name: document.getElementById('inputName').value,
                 email: document.getElementById('inputEmail').value,
                 password: document.getElementById('inputPassword').value,
-                address: document.getElementById('inputAddress').value,
-                city: document.getElementById('inputCity').value,
-                state: document.getElementById('inputState').value,
-                zip: document.getElementById('inputZip').value,
-                phone: document.getElementById('inputPhone').value
+                // Outros campos conforme necessário
             };
 
-            axios.post('/users', userData)
+            axios.post('http://localhost:3000/users', userData)
                 .then(function (response) {
                     alert('Usuário cadastrado com sucesso!');
-                    // Redirecionar para a página de login ou principal
+                    window.location.href = 'login.html'; // Redireciona para a página de login
                 })
-                .catch(function (error) {
-                    alert('Erro ao cadastrar usuário!');
-                    console.log(error);
-                });
+            s.catch(function (error) {
+                alert('Erro ao cadastrar usuário!');
+                console.log(error);
+            });
         });
     </script>
+
 
 
 </body>

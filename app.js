@@ -8,8 +8,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // URI do MongoDB Atlas 
-const mongoDBURI = 'mongodb+srv://Akassiosc:yQXNgN7JSB7pMARK@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority';
+const mongoDBURI = 'mongodb+srv://Akassiosc:tfueyMzWpyYGwvow@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoDBURI);
+
 
 // Esquema do Modelo de Usuário
 const UserSchema = new mongoose.Schema({
@@ -20,13 +21,13 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-app.use((req, res, next) => {
-    // Verificar se o usuário é administrador
-    if (req.body.email !== 'administrador@gmail.com') {
+// Middleware para verificar se o usuário é administrador
+const adminMiddleware = (req, res, next) => {
+    if (req.body.email && req.body.email !== 'administrador@gmail.com') {
         return res.status(403).send({ message: 'Acesso negado.' });
     }
     next();
-});
+};
 
 // Rota para criar um novo usuário
 app.post('/users', async (req, res) => {
@@ -49,8 +50,8 @@ app.get('/users', async (req, res) => {
     }
 });
 
-// Rota para deletar um usuário
-app.delete('/users/:id', async (req, res) => {
+// Rota para deletar um usuário (com middleware de admin)
+app.delete('/users/:id', adminMiddleware, async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.status(204).send();
@@ -59,8 +60,8 @@ app.delete('/users/:id', async (req, res) => {
     }
 });
 
-// Rota para atualizar um usuário
-app.put('/users/:id', async (req, res) => {
+// Rota para atualizar um usuário (com middleware de admin)
+app.put('/users/:id', adminMiddleware, async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.send(updatedUser);
@@ -76,20 +77,16 @@ app.post('/login', async (req, res) => {
         if (!user) {
             return res.status(401).send({ message: 'Usuário não encontrado.' });
         }
-
-
         if (user.password !== req.body.password) {
             return res.status(401).send({ message: 'Senha incorreta.' });
         }
-
         res.send({ message: 'Login bem-sucedido.' });
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
-
-// Rota de processamento de pagamento 
+// Rota de processamento de pagamento
 app.post('/processar-pagamento', async (req, res) => {
     console.log('Dados de pagamento:', req.body);
     res.status(200).send({ message: 'Pagamento processado com sucesso!' });
