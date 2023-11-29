@@ -95,6 +95,32 @@
                 });
         });
     </script>
+
+
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const loginData = {
+                email: document.getElementById('inputEmail').value,
+                password: document.getElementById('inputPassword').value
+            };
+
+            axios.post('http://localhost:3000/login', loginData)
+                .then(function (response) {
+                    // Armazenar o email do usuário no LocalStorage
+                    localStorage.setItem('userEmail', loginData.email);
+
+                    // Redirecionar para a página inicial
+                    window.location.href = 'index.html';
+                })
+                .catch(function (error) {
+                    alert('Falha no login!');
+                    console.error(error);
+                });
+        });
+    </script>
+
 </body>
 
 </html>
