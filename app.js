@@ -20,6 +20,14 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
+app.use((req, res, next) => {
+    // Verificar se o usuário é administrador
+    if (req.body.email !== 'administrador@gmail.com') {
+        return res.status(403).send({ message: 'Acesso negado.' });
+    }
+    next();
+});
+
 // Rota para criar um novo usuário
 app.post('/users', async (req, res) => {
     try {
@@ -69,7 +77,7 @@ app.post('/login', async (req, res) => {
             return res.status(401).send({ message: 'Usuário não encontrado.' });
         }
 
-        // Aqui você deve verificar a senha. Em um caso real, a senha deve ser criptografada.
+
         if (user.password !== req.body.password) {
             return res.status(401).send({ message: 'Senha incorreta.' });
         }
@@ -81,7 +89,7 @@ app.post('/login', async (req, res) => {
 });
 
 
-// Rota de processamento de pagamento (exemplo)
+// Rota de processamento de pagamento 
 app.post('/processar-pagamento', async (req, res) => {
     console.log('Dados de pagamento:', req.body);
     res.status(200).send({ message: 'Pagamento processado com sucesso!' });
