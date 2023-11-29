@@ -36,12 +36,18 @@
         .table td {
             vertical-align: middle;
         }
+
+        #userList {
+            display: none;
+            /* Ocultar inicialmente */
+        }
     </style>
 </head>
 
 <body>
     <div class="container mt-5">
         <h2>Painel Administrativo</h2>
+        <p id="adminMessage" style="color: red;"></p> <!-- Mensagem de alerta -->
         <div id="userList" class="mt-4">
             <table class="table">
                 <thead>
@@ -60,51 +66,45 @@
     </div>
 
     <script>
-        function loadUsers() {
-            axios.get('http://localhost:3000/users')
-                .then(function (response) {
-                    const users = response.data;
-                    const usersTableBody = document.getElementById('usersTableBody');
-                    usersTableBody.innerHTML = '';
+        const adminEmail = 'administrador@gmail.com';
+        const loggedUserEmail = localStorage.getItem('userEmail');
 
-                    users.forEach(user => {
-                        let buttons = '';
-                        if (user.email === 'akassio@gmail.com') {
-                            buttons = `
-                                <button onclick="editUser('${user._id}', '${user.name}')" class="btn btn-secondary">Editar</button>
-                                <button onclick="deleteUser('${user._id}')" class="btn btn-danger">Excluir</button>
-                            `;
-                        }
+        if (loggedUserEmail !== adminEmail) {
+            document.getElementById('adminMessage').innerText = 'Acesso restrito apenas para administradores.';
+        } else {
+            document.getElementById('userList').style.display = 'block';
 
-                        usersTableBody.innerHTML += `
+            function loadUsers() {
+                axios.get('http://localhost:3000/users', {
+                    headers: { useremail: loggedUserEmail }
+                })
+                    .then(function (response) {
+                        const users = response.data;
+                        const usersTableBody = document.getElementById('usersTableBody');
+                        usersTableBody.innerHTML = '';
+                        users.forEach(user => {
+                            usersTableBody.innerHTML += `
                             <tr>
                                 <td>${user._id}</td>
                                 <td>${user.name}</td>
                                 <td>${user.email}</td>
-                                <td>${buttons}</td>
+                                <td>
+                                    <button onclick="editUser('${user._id}', '${user.name}')" class="btn btn-secondary">Editar</button>
+                                    <button onclick="deleteUser('${user._id}')" class="btn btn-danger">Excluir</button>
+                                </td>
                             </tr>
                         `;
+                        });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
                     });
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+            }
 
-        function deleteUser(userId) {
-            axios.delete(`http://localhost:3000/users/${userId}`)
-                .then(function (response) {
-                    loadUsers();
+            function deleteUser(userId) {
+                axios.delete(`http://localhost:3000/users/${userId}`, {
+                    headers: { useremail: loggedUserEmail }
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-
-        function editUser(userId, userName) {
-            const newName = prompt("Editar nome do usuário:", userName);
-            if (newName !== null && newName !== userName) {
-                axios.put(`http://localhost:3000/users/${userId}`, { name: newName })
                     .then(function (response) {
                         loadUsers();
                     })
@@ -112,9 +112,26 @@
                         console.log(error);
                     });
             }
-        }
 
-        window.onload = loadUsers;
+            function editUser(userId, userName) {
+                const newName = prompt("Editar nome do usuário:", userName);
+                if (newName !== null && newName !== userName) {
+                    axios.put(`http://localhost:3000/users/${userId}`, {
+                        name: newName
+                    }, {
+                        headers: { useremail: loggedUserEmail }
+                    })
+                        .then(function (response) {
+                            loadUsers();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+
+            loadUsers();
+        }
     </script>
 </body>
 

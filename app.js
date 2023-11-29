@@ -7,10 +7,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// URI do MongoDB Atlas 
+// URI do MongoDB Atlas
 const mongoDBURI = 'mongodb+srv://Akassiosc:tfueyMzWpyYGwvow@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoDBURI);
-
 
 // Esquema do Modelo de Usuário
 const UserSchema = new mongoose.Schema({
@@ -23,7 +22,7 @@ const User = mongoose.model('User', UserSchema);
 
 // Middleware para verificar se o usuário é administrador
 const adminMiddleware = (req, res, next) => {
-    if (req.body.email && req.body.email !== 'administrador@gmail.com') {
+    if (req.headers.useremail !== 'administrador@gmail.com') {
         return res.status(403).send({ message: 'Acesso negado.' });
     }
     next();
@@ -41,7 +40,7 @@ app.post('/users', async (req, res) => {
 });
 
 // Rota para listar todos os usuários
-app.get('/users', async (req, res) => {
+app.get('/users', adminMiddleware, async (req, res) => {
     try {
         const users = await User.find();
         res.send(users);
@@ -50,7 +49,7 @@ app.get('/users', async (req, res) => {
     }
 });
 
-// Rota para deletar um usuário (com middleware de admin)
+// Rota para deletar um usuário
 app.delete('/users/:id', adminMiddleware, async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
@@ -60,7 +59,7 @@ app.delete('/users/:id', adminMiddleware, async (req, res) => {
     }
 });
 
-// Rota para atualizar um usuário (com middleware de admin)
+// Rota para atualizar um usuário
 app.put('/users/:id', adminMiddleware, async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
