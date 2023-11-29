@@ -61,6 +61,26 @@ app.put('/users/:id', async (req, res) => {
     }
 });
 
+// Rota para login de usuário
+app.post('/login', async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            return res.status(401).send({ message: 'Usuário não encontrado.' });
+        }
+
+        // Aqui você deve verificar a senha. Em um caso real, a senha deve ser criptografada.
+        if (user.password !== req.body.password) {
+            return res.status(401).send({ message: 'Senha incorreta.' });
+        }
+
+        res.send({ message: 'Login bem-sucedido.' });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+
 // Rota de processamento de pagamento (exemplo)
 app.post('/processar-pagamento', async (req, res) => {
     console.log('Dados de pagamento:', req.body);

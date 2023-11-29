@@ -5,20 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - iCloset - Loja de Roupas Online</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
 
-    <!-- Custom styles -->
     <style>
         body {
             background-color: #ffecef;
-            /* Um tom claro de rosa */
             font-family: 'Open Sans', sans-serif;
         }
 
         .login-container {
             min-height: 100vh;
-            /* Faz o container ocupar toda a altura da tela */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -33,25 +29,20 @@
 
         .login-form h2 {
             color: #f06c9b;
-            /* Um rosa mais escuro para o título */
             margin-bottom: 1rem;
         }
 
         .btn-primary {
             background-color: #f06c9b;
-            /* A cor rosa do botão */
             border: none;
-            /* Remove a borda padrão do botão */
         }
 
         .btn-primary:hover {
             background-color: #e0638b;
-            /* Um rosa mais escuro quando passar o mouse */
         }
 
         .form-label {
             color: #444;
-            /* Cor escura para as labels que contrasta bem com o fundo rosa */
         }
     </style>
 </head>
@@ -60,30 +51,32 @@
     <div class="container login-container">
         <div class="col-md-6 col-lg-4 login-form">
             <h2 class="text-center">Login</h2>
-            <form>
+            <form id="formLogin">
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu email">
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu email" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Digite sua senha">
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Digite sua senha"
+                        required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Entrar</button>
             </form>
         </div>
     </div>
 
-
-
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-    <!-- autenticação de usuário -->
+    <!-- Adicionando Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script para enviar dados do formulário de login -->
     <script>
-        document.querySelector('form').addEventListener('submit', function (e) {
+        document.getElementById('formLogin').addEventListener('submit', function (e) {
             e.preventDefault();
 
             const loginData = {
@@ -91,18 +84,17 @@
                 password: document.getElementById('inputPassword').value
             };
 
-            axios.post('/login', loginData)
+            axios.post('http://localhost:3000/login', loginData)
                 .then(function (response) {
                     alert('Login bem-sucedido!');
-                    // Redirecionar para a página principal ou painel administrativo
+                    // Aqui você pode redirecionar o usuário para outra página
                 })
                 .catch(function (error) {
-                    alert('Erro no login!');
-                    console.log(error);
+                    alert('Falha no login!');
+                    console.error(error);
                 });
         });
     </script>
-
 </body>
 
 </html>
