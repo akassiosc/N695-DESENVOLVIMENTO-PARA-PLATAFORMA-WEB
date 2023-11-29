@@ -5,20 +5,18 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// URI do MongoDB Atlas
-mongoose.connect('mongodb+srv://Akassiosc:1PkTZ8vunbyWEOLb@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+// URI do MongoDB Atlas (substitua com a sua própria URI)
+const mongoDBURI = 'sua_uri_do_mongodb_atlas';
+mongoose.connect(mongoDBURI);
 
 // Esquema do Modelo de Usuário
 const UserSchema = new mongoose.Schema({
     name: String,
     email: String,
-    password: String, // Em um projeto real, você deve criptografar as senhas
-    // Adicione outros campos conforme necessário
+    password: String,
 });
 
 const User = mongoose.model('User', UserSchema);
@@ -64,11 +62,9 @@ app.put('/users/:id', async (req, res) => {
     }
 });
 
-// Rota de processamento de pagamento
+// Rota de processamento de pagamento (exemplo)
 app.post('/processar-pagamento', async (req, res) => {
-    // Implemente a lógica para processar o pagamento
     console.log('Dados de pagamento:', req.body);
-    // Envie uma resposta de sucesso ou falha
     res.status(200).send({ message: 'Pagamento processado com sucesso!' });
 });
 
