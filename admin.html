@@ -4,10 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administração - Loja de Roupas Online</title>
+    <title>Administração - iCloset</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            background-color: #fff0f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+        }
+
+        .navbar,
+        .footer {
+            background-color: #ff69b4;
+        }
+
+        .btn-secondary,
+        .btn-danger {
+            margin-right: 5px;
+        }
+
+        .btn-secondary {
+            background-color: #ffb6c1;
+            border-color: #ffb6c1;
+        }
+
+        .btn-danger {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,7 +55,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nome de Usuário</th>
+                        <th>Nome</th>
+                        <th>Email</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -31,21 +69,27 @@
 
     <script>
         function loadUsers() {
-            axios.get('/api/users')
+            axios.get('http://localhost:3000/users')
                 .then(function (response) {
                     const users = response.data;
                     const usersTableBody = document.getElementById('usersTableBody');
                     usersTableBody.innerHTML = '';
 
                     users.forEach(user => {
+                        let buttons = '';
+                        if ('administrador@gmail.com' === 'SEU_EMAIL_ADMIN') {
+                            buttons = `
+                                <button onclick="editUser('${user._id}', '${user.name}')" class="btn btn-secondary">Editar</button>
+                                <button onclick="deleteUser('${user._id}')" class="btn btn-danger">Excluir</button>
+                            `;
+                        }
+
                         usersTableBody.innerHTML += `
                             <tr>
                                 <td>${user._id}</td>
                                 <td>${user.name}</td>
-                                <td>
-                                    <button onclick="editUser('${user._id}')" class="btn btn-secondary">Editar</button>
-                                    <button onclick="deleteUser('${user._id}')" class="btn btn-danger">Excluir</button>
-                                </td>
+                                <td>${user.email}</td>
+                                <td>${buttons}</td>
                             </tr>
                         `;
                     });
@@ -55,10 +99,8 @@
                 });
         }
 
-        window.onload = loadUsers;
-
         function deleteUser(userId) {
-            axios.delete(`/api/users/${userId}`)
+            axios.delete(`http://localhost:3000/users/${userId}`)
                 .then(function (response) {
                     loadUsers();
                 })
@@ -67,10 +109,10 @@
                 });
         }
 
-        function editUser(userId) {
-            const userName = prompt("Digite o novo nome do usuário:");
-            if (userName) {
-                axios.put(`/api/users/${userId}`, { name: userName })
+        function editUser(userId, userName) {
+            const newName = prompt("Editar nome do usuário:", userName);
+            if (newName !== null && newName !== userName) {
+                axios.put(`http://localhost:3000/users/${userId}`, { name: newName })
                     .then(function (response) {
                         loadUsers();
                     })
@@ -79,12 +121,9 @@
                     });
             }
         }
-    </script>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        window.onload = loadUsers;
+    </script>
 </body>
 
 </html>
