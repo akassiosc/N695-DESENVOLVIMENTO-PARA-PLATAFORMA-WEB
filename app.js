@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,8 +7,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// URI do MongoDB Atlas (substitua com a sua própria URI)
-const mongoDBURI = 'sua_uri_do_mongodb_atlas';
+// URI do MongoDB Atlas 
+const mongoDBURI = 'mongodb+srv://Akassiosc:yQXNgN7JSB7pMARK@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(mongoDBURI);
 
 // Esquema do Modelo de Usuário
