@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // URI do MongoDB Atlas
-const mongoDBURI = 'mongodb+srv://Akassiosc:tfueyMzWpyYGwvow@cluster0.dvo5hqu.mongodb.net/?retryWrites=true&w=majority';
+const mongoDBURI = 'mongodb+srv://Caio:<rGmANC1X7nDrtkn9!@#>@uniformongodb.qlhrn6x.mongodb.net/';
 mongoose.connect(mongoDBURI);
 
 // Esquema do Modelo de Usuário
@@ -21,10 +21,15 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 
 // Middleware para verificar se o usuário é administrador
+const ADMIN_EMAIL = 'administrador@gmail.com';
+
 const adminMiddleware = (req, res, next) => {
-    if (req.headers.useremail !== 'administrador@gmail.com') {
-        return res.status(403).send({ message: 'Acesso negado.' });
+    const { useremail } = req.headers;
+
+    if (!useremail || useremail.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+        return res.status(403).send({ error: 'Acesso negado: Permissão de administrador necessária.' });
     }
+
     next();
 };
 
@@ -35,27 +40,47 @@ app.post('/users', async (req, res) => {
         await newUser.save();
         res.status(201).send(newUser);
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Erro ao criar usuário:', error);
+
+        if (error.code === 11000) {
+            // Tratar erro de duplicação de chave única (por exemplo, e-mail duplicado)
+            res.status(400).send('E-mail já registrado.');
+        } else {
+            res.status(500).send('Erro interno ao criar usuário.');
+        }
     }
 });
 
 // Rota para listar todos os usuários
 app.get('/users', adminMiddleware, async (req, res) => {
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+
     try {
-        const users = await User.find();
+        const users = await User.find()
+            .skip((page - 1) * limit)
+            .limit(limit);
+
         res.send(users);
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Erro ao buscar usuários:', error.message);
+        res.status(500).json({ error: 'Erro ao buscar usuários', message: error.message });
     }
 });
 
 // Rota para deletar um usuário
 app.delete('/users/:id', adminMiddleware, async (req, res) => {
     try {
+        const isValidObjectId = mongoose.Types.ObjectId.isValid(req.params.id);
+        if (!isValidObjectId) {
+            return res.status(400).send('ID de usuário inválido');
+        }
+
         await User.findByIdAndDelete(req.params.id);
         res.status(204).send();
     } catch (error) {
-        res.status(500).send(error);
+        console.error('Erro ao excluir usuário:', error);
+        res.status(500).send('Erro interno ao excluir usuário');
     }
 });
 
